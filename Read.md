@@ -84,3 +84,13 @@ https://nodejs.org/en/download
 install yarn from 
 
 https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable
+
+
+containe
+
+http://localhost:8080/
+
+
+pc
+
+http://localhost:3000/
