@@ -94,3 +94,66 @@ http://localhost:8080/
 pc
 
 http://localhost:3000/
+
+---
+
+### **6. Bank Frontend Docker Project (Step-by-Step Guide)**
+
+Build Stage – creates the production build
+
+Run Stage – serves the build using Nginx
+
+#########################################################
+# STAGE 1: BUILD STAGE
+# Purpose:
+# - Use Node.js to install dependencies
+# - Build the frontend (React) application
+#########################################################
+
+# Use Node.js 18 with Alpine Linux (small and fast image)
+FROM node:18-alpine AS build
+
+# Set working directory inside the container
+# All commands will run inside /app
+WORKDIR /app
+
+# Copy only package.json and package-lock.json first
+# This helps Docker cache npm install layer
+COPY package*.json ./
+
+# Install all Node.js dependencies
+# Creates node_modules folder
+RUN npm install
+
+# Copy complete project source code into container
+# Includes src/, public/, config files, etc.
+COPY . .
+
+# Build the frontend application for production
+# Output will be generated in /app/build folder
+RUN npm run build
+
+
+#########################################################
+# STAGE 2: RUN STAGE
+# Purpose:
+# - Use Nginx to serve static frontend files
+# - Keep final image small and production-ready
+#########################################################
+
+# Use lightweight Nginx image
+FROM nginx:alpine
+
+# Copy the build output from Stage 1 to Nginx web root
+# /usr/share/nginx/html is default Nginx directory
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80 for HTTP traffic
+EXPOSE 80
+
+# Start Nginx in foreground mode
+# Required so container keeps running
+CMD ["nginx", "-g", "daemon off;"]
+
+
+---
