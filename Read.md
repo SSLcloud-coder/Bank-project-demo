@@ -97,6 +97,17 @@ http://localhost:3000/
 
 ---
 
+📦 Multi-Stage Dockerfile – Step-by-Step Explanation
+
+This Dockerfile is used to build and run a frontend (React) application using Node.js and Nginx.
+
+It has two stages:
+
+Build Stage – creates the production build
+
+Run Stage – serves the build using Nginx
+
+
 ### **6. Bank Frontend Docker Project (Step-by-Step Guide)**
 
 Build Stage – creates the production build
