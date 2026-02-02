@@ -75,3 +75,12 @@ docker run -d -p 8080:80 bank-frontend
 
 
 http://localhost:8080
+
+
+For loacl PC test 
+Down load and intall nodejs 
+https://nodejs.org/en/download
+
+install yarn from 
+
+https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable
